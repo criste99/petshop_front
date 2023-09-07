@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./comida.component.scss']
 })
 export class ComidaComponent {
-
+  title_comida = "MODULO COMIDA"
 }

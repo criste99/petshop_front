@@ -5,9 +5,9 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Mascotas</a>
-      <a mat-list-item href="#">Comida</a>
-      <a mat-list-item href="#">Dueño</a>
+      <a mat-list-item href="/mascota">Mascotas</a>
+      <a mat-list-item href="/comida">Comida</a>
+      <a mat-list-item href="/dueño">Dueño</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -20,7 +20,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>PetsShop_front</span>
+      <span>PetsShop</span>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

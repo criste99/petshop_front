@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./mascota.component.scss']
 })
 export class MascotaComponent {
-
+  title_mascota = "MODULO MASCOTA"
 }
