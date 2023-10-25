@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MascotaComponent } from './mascota/mascota.component';
-import { DuenoComponent } from './dueno/dueno.component';
-import { ComidaComponent } from './comida/comida.component';
+import { MascotaComponent } from './components/mascota/mascota.component';
+import { DuenoComponent } from './components/dueno/dueno.component';
+import { ComidaComponent } from './components/comida/comida.component';
 
 const routes: Routes = [
   {path:"mascota",component:MascotaComponent},

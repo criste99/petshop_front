@@ -1,0 +1,63 @@
+<form [formGroup]="addressFormMascota" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>Mascota</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Nombre" formControlName="nombre">
+            <mat-error *ngIf="addressFormMascota.controls['nombre'].hasError('required')">
+              Nombre de la marca <strong> es requerida</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Raza" formControlName="raza">
+            <mat-error *ngIf="addressFormMascota.controls['raza'].hasError('required')">
+              Nombre de la marca <strong> es requerida</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Estatura" formControlName="estaturacm">
+            <mat-error *ngIf="addressFormMascota.controls['estaturacm'].hasError('required')">
+              Nombre de la marca <strong> es requerida</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Peso" formControlName="peso">
+            <mat-error *ngIf="addressFormMascota.controls['peso'].hasError('required')">
+              Nombre de la marca <strong> es requerida</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Edad" formControlName="edad">
+            <mat-error *ngIf="addressFormMascota.controls['edad'].hasError('required')">
+              Nombre de la marca <strong> es requerida</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+  
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" [disabled]="!addressFormMascota.valid" type="submit">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
