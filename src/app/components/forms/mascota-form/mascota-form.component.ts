@@ -37,9 +37,8 @@ export class MascotaFormComponent {
     try {
       this.infoMascota.nombre = this.addressFormMascota.controls['nombre'].value;
       this.infoMascota.raza = this.addressFormMascota.controls['raza'].value;
-      this.infoMascota.edad = this.addressFormMascota.controls['edad'].value;
       this.infoMascota.peso = this.addressFormMascota.controls['peso'].value;
-
+      this.infoMascota.edad = this.addressFormMascota.controls['edad'].value;
       console.log(this.infoMascota);
 
       const res = await this.api.post("mascota", this.infoMascota);

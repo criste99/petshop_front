@@ -74,12 +74,13 @@ export class MascotaComponent implements OnInit{
       } else if (result.isDismissed && result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
           'Cancelado',
-          'Tu dueno sigue guardada',
+          'Tu mascota sigue guardada',
           'error'
         );
       }
     });
   }
+
 
   editarItem(element: any){
     this.modalService.titulo = "Modificar Mascota";
