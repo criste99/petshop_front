@@ -23,8 +23,12 @@ export class RestService {
       return response
     }
 
-    public async delete(controller: string, Id: String){
-      return await this.api.delete(this.Url + controller + "/" + Id)
+    public async delete(controller: string, id: String){
+      var response: any
+      return await this.api.delete(this.Url + controller + "/" + id).toPromise().then(res=>{
+        response = res;
+      })
+      return response;
     }
 
     public async update(controller: string, id:string, body:any){

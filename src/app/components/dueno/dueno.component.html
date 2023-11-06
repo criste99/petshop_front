@@ -14,8 +14,8 @@
           <div *ngIf="disCol=='Acciones'">
             <th mat-header-cell *matHeaderCellDef> {{disCol}} </th>
             <td mat-cell *matCellDef="let row">
-                <a class="opcion"><span class="material-symbols-outlined">edit</span></a>
-                <a class="opcion"><span class="material-symbols-outlined">delete</span></a>
+              <a class="opcion" (click)="editarItem(row)"><span class="material-symbols-outlined">edit</span></a>
+              <a class="opcion" (click)="eliminarItem(row)"><span class="material-symbols-outlined">delete</span></a>
                 <a class="opcion"><i class="fa-solid fa-trash"></i></a>
             </td>
           </div>

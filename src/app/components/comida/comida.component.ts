@@ -5,6 +5,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { RestService } from 'src/app/Services/rest.service';
 import { ComidaFormComponent } from '../forms/comida-form/comida-form.component';
+import Swal from 'sweetalert2';
+import { ModalServiceService } from 'src/app/Services/modal-service.service';
 
 @Component({
   selector: 'app-comida',
@@ -18,7 +20,7 @@ export class ComidaComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public api: RestService, public dialog: MatDialog) {
+  constructor(public api: RestService,public dialog: MatDialog, public modalService: ModalServiceService) {
     this.dataSource = new MatTableDataSource();
   }
   ngOnInit(): void {
@@ -48,7 +50,45 @@ export class ComidaComponent implements OnInit {
       height: '300px',
     });
    }
+   eliminarItem(comida: any) {
+    console.log(comida.id);
+    Swal.fire({
+      title: '¿Estás seguro que deseas remover la comida?',
+      text: 'La comida no podrá ser recuperada!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, elíminalo!',
+      cancelButtonText: 'No, olvídalo'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.api.delete("comida",comida.id).then((res) => {
+          if (res =! null) {
+            Swal.fire(
+              'Eliminado!',
+              'Tu comida ha sido eliminada.',
+              'success'
+            );
+          }
+        });
+      } else if (result.isDismissed && result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelado',
+          'Tu comida sigue guardada',
+          'error'
+        );
+      }
+    });
+  }
 
+  editarItem(element: any){
+    this.modalService.titulo = "Modificar Comida";
+    this.modalService.comida = element
+  this.modalService.accion.next("Actualizar");
+  this.dialog.open(ComidaFormComponent, {
+    width: '350px',
+    height: '200px',
+  });
+  }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

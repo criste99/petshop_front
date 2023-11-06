@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { RestService } from 'src/app/Services/rest.service';
 import { DuenoFormComponent } from '../forms/dueno-form/dueno-form.component';
 import { MatDialog } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
+import { ModalServiceService } from 'src/app/Services/modal-service.service';
 
 @Component({
   selector: 'app-dueno',
@@ -18,7 +20,7 @@ export class DuenoComponent implements OnInit{
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public api: RestService, public dialog: MatDialog) {
+  constructor(public api: RestService,public dialog: MatDialog, public modalService: ModalServiceService) {
     this.dataSource = new MatTableDataSource();
   }
   ngOnInit(): void {
@@ -49,6 +51,46 @@ export class DuenoComponent implements OnInit{
       height: '500px',
     });
    }
+
+   eliminarItem(dueno: any) {
+    console.log(dueno.id);
+    Swal.fire({
+      title: '¿Estás seguro que deseas remover la dueno?',
+      text: 'La dueno no podrá ser recuperada!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, elíminalo!',
+      cancelButtonText: 'No, olvídalo'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.api.delete("dueno",dueno.id).then((res) => {
+          if (res =! null) {
+            Swal.fire(
+              'Eliminado!',
+              'Tu dueno ha sido eliminada.',
+              'success'
+            );
+          }
+        });
+      } else if (result.isDismissed && result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelado',
+          'Tu dueno sigue guardada',
+          'error'
+        );
+      }
+    });
+  }
+
+  editarItem(element: any){
+    this.modalService.titulo = "Modificar Dueno";
+    this.modalService.dueno = element
+  this.modalService.accion.next("Actualizar");
+  this.dialog.open(DuenoFormComponent, {
+    width: '350px',
+    height: '200px',
+  });
+  }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

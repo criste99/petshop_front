@@ -5,6 +5,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { RestService } from 'src/app/Services/rest.service';
 import { MascotaFormComponent } from '../forms/mascota-form/mascota-form.component';
+import Swal from 'sweetalert2';
+import { ModalServiceService } from 'src/app/Services/modal-service.service';
 
 @Component({
   selector: 'app-mascota',
@@ -18,7 +20,7 @@ export class MascotaComponent implements OnInit{
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public api: RestService, public dialog: MatDialog) {
+  constructor(public api: RestService,public dialog: MatDialog, public modalService: ModalServiceService) {
     this.dataSource = new MatTableDataSource();
   }
   ngOnInit(): void {
@@ -46,10 +48,48 @@ export class MascotaComponent implements OnInit{
   openDialog () {
     this.dialog.open(MascotaFormComponent, {
       width: '350px',
-      height: '200px',
+      height: '250px',
     });
    }
+   eliminarItem(mascota: any) {
+    console.log(mascota.id);
+    Swal.fire({
+      title: '¿Estás seguro que deseas remover la mascota?',
+      text: 'La mascota no podrá ser recuperada!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, elíminalo!',
+      cancelButtonText: 'No, olvídalo'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.api.delete("mascota",mascota.id).then((res) => {
+          if (res =! null) {
+            Swal.fire(
+              'Eliminado!',
+              'Tu mascota ha sido eliminada.',
+              'success'
+            );
+          }
+        });
+      } else if (result.isDismissed && result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelado',
+          'Tu dueno sigue guardada',
+          'error'
+        );
+      }
+    });
+  }
 
+  editarItem(element: any){
+    this.modalService.titulo = "Modificar Mascota";
+    this.modalService.mascota = element
+  this.modalService.accion.next("Actualizar");
+  this.dialog.open(MascotaFormComponent, {
+    width: '350px',
+    height: '200px',
+  });
+  }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

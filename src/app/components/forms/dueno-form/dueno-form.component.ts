@@ -17,7 +17,7 @@ export class DuenoFormComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    this.api.Get("dueño");
+    this.api.Get("dueno");
   }
   addressFormDueno = this.fb.group({
     nombre: [null, Validators.required],
@@ -32,7 +32,6 @@ export class DuenoFormComponent implements OnInit{
     nombre: "",
     tipo_id: "",
     identificacion: "",
-    edad: 0,
     correo: "",
     telefono: ""
   }
@@ -44,13 +43,12 @@ export class DuenoFormComponent implements OnInit{
       this.infoDueno.nombre = this.addressFormDueno.controls['nombre'].value;
       this.infoDueno.tipo_id = this.addressFormDueno.controls['tipo_id'].value;
       this.infoDueno.identificacion = this.addressFormDueno.controls['identificacion'].value;
-      this.infoDueno.edad = this.addressFormDueno.controls['edad'].value;
       this.infoDueno.correo = this.addressFormDueno.controls['correo'].value;
       this.infoDueno.telefono = this.addressFormDueno.controls['telefono'].value;
 
       console.log(this.infoDueno);
 
-      const res = await this.api.post("client", this.infoDueno);
+      const res = await this.api.post("dueno", this.infoDueno);
 
       if(res){
         Swal.fire(

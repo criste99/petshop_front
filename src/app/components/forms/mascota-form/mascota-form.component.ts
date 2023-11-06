@@ -19,7 +19,6 @@ export class MascotaFormComponent {
   addressFormMascota = this.fb.group({
     nombre: [null, Validators.required],
     raza: [null, Validators.required],
-    estaturacm:[null, Validators.required],
     peso:[null, Validators.required],
     edad:[null, Validators.required],
   });
@@ -27,9 +26,8 @@ export class MascotaFormComponent {
   infoMascota: MascotaModels = {
     nombre: "",
     raza: "",
-    estaturacm: 0,
     peso: 0,
-    edad: 0
+    edad: 0,
   }
 
   hasUnitNumber = false;
@@ -39,7 +37,6 @@ export class MascotaFormComponent {
     try {
       this.infoMascota.nombre = this.addressFormMascota.controls['nombre'].value;
       this.infoMascota.raza = this.addressFormMascota.controls['raza'].value;
-      this.infoMascota.estaturacm = this.addressFormMascota.controls['estaturacm'].value;
       this.infoMascota.edad = this.addressFormMascota.controls['edad'].value;
       this.infoMascota.peso = this.addressFormMascota.controls['peso'].value;
 
