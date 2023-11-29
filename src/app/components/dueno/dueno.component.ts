@@ -6,7 +6,7 @@ import { RestService } from 'src/app/Services/rest.service';
 import { DuenoFormComponent } from '../forms/dueno-form/dueno-form.component';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
-import { ModalServiceService } from 'src/app/Services/modal-service.service';
+import { ModalService } from 'src/app/Services/modal-service';
 
 @Component({
   selector: 'app-dueno',
@@ -20,7 +20,7 @@ export class DuenoComponent implements OnInit{
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public api: RestService,public dialog: MatDialog, public modalService: ModalServiceService) {
+  constructor(public api: RestService,public dialog: MatDialog, public modalService: ModalService) {
     this.dataSource = new MatTableDataSource();
   }
   ngOnInit(): void {
@@ -55,8 +55,8 @@ export class DuenoComponent implements OnInit{
    eliminarItem(dueno: any) {
     console.log(dueno.id);
     Swal.fire({
-      title: '¿Estás seguro que deseas remover la dueno?',
-      text: 'La dueno no podrá ser recuperada!',
+      title: '¿Estás seguro que deseas remover la dueño?',
+      text: 'El dueño no podrá ser recuperado!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Si, elíminalo!',
@@ -67,7 +67,7 @@ export class DuenoComponent implements OnInit{
           if (res =! null) {
             Swal.fire(
               'Eliminado!',
-              'Tu dueno ha sido eliminada.',
+              'Tu dueno ha sido eliminado.',
               'success'
             );
           }
@@ -75,16 +75,17 @@ export class DuenoComponent implements OnInit{
       } else if (result.isDismissed && result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
           'Cancelado',
-          'Tu dueno sigue guardada',
+          'Tu dueno sigue guardado',
           'error'
         );
       }
     });
   }
 
-  editarItem(element: any){
+  editarItem(row: any){
     this.modalService.titulo = "Modificar Dueno";
-    this.modalService.dueno = element
+    this.modalService.dueno = row
+    this.modalService.id = row.id;
   this.modalService.accion.next("Actualizar");
   this.dialog.open(DuenoFormComponent, {
     width: '350px',

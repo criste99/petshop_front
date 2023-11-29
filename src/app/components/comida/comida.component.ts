@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { RestService } from 'src/app/Services/rest.service';
 import { ComidaFormComponent } from '../forms/comida-form/comida-form.component';
 import Swal from 'sweetalert2';
-import { ModalServiceService } from 'src/app/Services/modal-service.service';
+import { ModalService } from 'src/app/Services/modal-service';
 
 @Component({
   selector: 'app-comida',
@@ -20,7 +20,7 @@ export class ComidaComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public api: RestService,public dialog: MatDialog, public modalService: ModalServiceService) {
+  constructor(public api: RestService,public dialog: MatDialog, public modalService: ModalService) {
     this.dataSource = new MatTableDataSource();
   }
   ngOnInit(): void {
@@ -80,9 +80,10 @@ export class ComidaComponent implements OnInit {
     });
   }
 
-  editarItem(element: any){
+  editarItem(row: any){
     this.modalService.titulo = "Modificar Comida";
-    this.modalService.comida = element
+    this.modalService.comida = row
+    this.modalService.id = row.id;
   this.modalService.accion.next("Actualizar");
   this.dialog.open(ComidaFormComponent, {
     width: '350px',

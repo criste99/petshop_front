@@ -8,7 +8,8 @@ import { ComidaModels } from '../models/ComidaModel';
     providedIn: 'root'
   })
 
-  export class ModalServiceService{
+  export class ModalService{
+    id: number;
     mascota:MascotaModels;
     dueno:DuenoModels;
     comida:ComidaModels;

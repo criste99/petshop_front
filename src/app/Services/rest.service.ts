@@ -31,9 +31,12 @@ export class RestService {
       return response;
     }
 
-    public async update(controller: string, id:string, body:any){
-      return await this.api.put(this.Url + controller + "/" + id, body)
+    public async put(controller: string, id:string, body:any){
+      var response: any
+      return await this.api.put(this.Url + controller + "/" + id, body).subscribe((res) => {
+        response = res;
+      })
+      return response;
     }
-
 
 }

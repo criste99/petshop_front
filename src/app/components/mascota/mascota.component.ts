@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { RestService } from 'src/app/Services/rest.service';
 import { MascotaFormComponent } from '../forms/mascota-form/mascota-form.component';
 import Swal from 'sweetalert2';
-import { ModalServiceService } from 'src/app/Services/modal-service.service';
+import { ModalService } from 'src/app/Services/modal-service';
 
 @Component({
   selector: 'app-mascota',
@@ -20,7 +20,7 @@ export class MascotaComponent implements OnInit{
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public api: RestService,public dialog: MatDialog, public modalService: ModalServiceService) {
+  constructor(public api: RestService,public dialog: MatDialog, public modalService: ModalService) {
     this.dataSource = new MatTableDataSource();
   }
   ngOnInit(): void {
