@@ -100,7 +100,7 @@ export class DuenoFormComponent implements OnInit{
         if (res) {
           const result = await Swal.fire({
             title: 'Perfecto!',
-            text: 'Su pieza ha sido actualizada',
+            text: 'Su dueño ha sido actualizado',
             icon: 'success',
             confirmButtonText: 'OK'
         });
@@ -110,7 +110,7 @@ export class DuenoFormComponent implements OnInit{
         } else {
           Swal.fire(
             'Perfecto!',
-            'Su pieza ha sido actualizada',
+            'Su dueño ha sido actualizado',
             'success'
           )
         }
@@ -121,7 +121,7 @@ export class DuenoFormComponent implements OnInit{
         if (res) {
           const result = await Swal.fire({
             title: 'Perfecto!',
-            text: 'Su pieza ha sido registrada',
+            text: 'Su dueño ha sido registrado',
             icon: 'success',
             confirmButtonText: 'Ok'
         });
@@ -131,7 +131,7 @@ export class DuenoFormComponent implements OnInit{
         } else {
           Swal.fire(
             'Perfecto!',
-            'Su pieza ha sido registrada',
+            'Su dueño ha sido registrado',
             'success'
           )
         }

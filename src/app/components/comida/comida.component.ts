@@ -45,6 +45,8 @@ export class ComidaComponent implements OnInit {
     }
   }
   openDialog () {
+    this.modalService.titulo = "Nueva Comida";
+    this.modalService.accion.next("Crear Comida");
     this.dialog.open(ComidaFormComponent, {
       width: '350px',
       height: '300px',
@@ -87,7 +89,7 @@ export class ComidaComponent implements OnInit {
   this.modalService.accion.next("Actualizar");
   this.dialog.open(ComidaFormComponent, {
     width: '350px',
-    height: '200px',
+    height: '300px',
   });
   }
   applyFilter(event: Event) {

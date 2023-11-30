@@ -44,8 +44,9 @@ export class MascotaComponent implements OnInit{
       this.displayedColumns.push('Acciones');
     }
   }
-
   openDialog () {
+    this.modalService.titulo = "Nueva Mascota";
+    this.modalService.accion.next("Crear Mascota");
     this.dialog.open(MascotaFormComponent, {
       width: '350px',
       height: '250px',
@@ -82,13 +83,13 @@ export class MascotaComponent implements OnInit{
   }
 
 
-  editarItem(element: any){
+  editarItem(row: any){
     this.modalService.titulo = "Modificar Mascota";
-    this.modalService.mascota = element
+    this.modalService.mascota = row
   this.modalService.accion.next("Actualizar");
   this.dialog.open(MascotaFormComponent, {
     width: '350px',
-    height: '200px',
+    height: '450px',
   });
   }
   applyFilter(event: Event) {

@@ -76,7 +76,7 @@ export class ComidaFormComponent implements OnInit {
         if (res) {
           const result = await Swal.fire({
             title: 'Perfecto!',
-            text: 'Su pieza ha sido actualizada',
+            text: 'Su comida ha sido actualizada',
             icon: 'success',
             confirmButtonText: 'OK'
         });
@@ -86,7 +86,7 @@ export class ComidaFormComponent implements OnInit {
         } else {
           Swal.fire(
             'Perfecto!',
-            'Su pieza ha sido actualizada',
+            'Su comida ha sido actualizada',
             'success'
           )
         }
@@ -97,7 +97,7 @@ export class ComidaFormComponent implements OnInit {
         if (res) {
           const result = await Swal.fire({
             title: 'Perfecto!',
-            text: 'Su pieza ha sido registrada',
+            text: 'Su comida ha sido registrada',
             icon: 'success',
             confirmButtonText: 'Ok'
         });
@@ -107,7 +107,7 @@ export class ComidaFormComponent implements OnInit {
         } else {
           Swal.fire(
             'Perfecto!',
-            'Su pieza ha sido registrada',
+            'Su comida ha sido registrada',
             'success'
           )
         }

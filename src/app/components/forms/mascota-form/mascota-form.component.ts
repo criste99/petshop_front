@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 
 import { FormBuilder, Validators } from '@angular/forms';
+import { ModalService } from 'src/app/Services/modal-service';
 import { RestService } from 'src/app/Services/rest.service';
 import { MascotaModels } from 'src/app/models/MascotaModel';
 import Swal from 'sweetalert2';
@@ -13,14 +14,14 @@ import Swal from 'sweetalert2';
 })
 export class MascotaFormComponent {
   private fb = inject(FormBuilder);
-  constructor(public api: RestService){
+  titulo = "";
+  accion = "";
 
-  }
   addressFormMascota = this.fb.group({
-    nombre: [null, Validators.required],
-    raza: [null, Validators.required],
-    peso:[null, Validators.required],
-    edad:[null, Validators.required],
+    nombre: ['', Validators.required],
+    raza: ['', Validators.required],
+    peso:[0, Validators.required],
+    edad:[0, Validators.required],
   });
 
   infoMascota: MascotaModels = {
@@ -30,9 +31,37 @@ export class MascotaFormComponent {
     edad: 0,
   }
 
-  hasUnitNumber = false;
+  infoMascota1 = {
+    id: 0,
+    nombre: "",
+    raza: "",
+    peso: 0,
+    edad: 0,
+  }
 
+ hasUnitNumber = false;
+  constructor(public api: RestService, public modalService: ModalService){}
 
+  ngOnInit(): void {
+    this.titulo = this.modalService.titulo;
+    this.accion = this.modalService.accion.value;
+    if (this.modalService.accion.value == 'Actualizar') {
+      console.log(this.modalService.comida);
+      
+      this.addressFormMascota.controls['nombre'].setValue(
+        this.modalService.mascota.nombre
+      );
+      this.addressFormMascota.controls['raza'].setValue(
+        this.modalService.mascota.raza
+      );
+      this.addressFormMascota.controls['peso'].setValue(
+        this.modalService.mascota.peso 
+      );
+      this.addressFormMascota.controls['edad'].setValue(
+        this.modalService.mascota.edad 
+      );
+    }
+  }
   async onSubmit(): Promise<void> {
     try {
       this.infoMascota.nombre = this.addressFormMascota.controls['nombre'].value;
@@ -46,13 +75,13 @@ export class MascotaFormComponent {
       if(res){
         Swal.fire(
           'Perfecto!',
-          'Su pieza ha sido registrada',
+          'Su mascota ha sido registrada',
           'success'
         )
       }else{
         Swal.fire(
           'Perfecto!',
-          'Su pieza ha sido registrada',
+          'Su mascota ha sido registrada',
           'success'
         )
       }
